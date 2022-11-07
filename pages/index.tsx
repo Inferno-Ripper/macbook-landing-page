@@ -1,86 +1,169 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import Header from '../components/Header';
+import { motion } from 'framer-motion';
+import { FaChevronDown } from 'react-icons/fa';
 
 const Home: NextPage = () => {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+	const [scrollPosition, setScrollPosition] = useState(0);
+	const [activeScrollPill, setActiveScrollPill] = useState('');
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+	const textContainer = {
+		hidden: { opacity: 0 },
+		show: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.5,
+			},
+		},
+	};
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
+	const textItem = {
+		hidden: { y: -50, opacity: 0 },
+		show: { y: 0, opacity: 1, transition: { duration: 1.2 } },
+	};
 
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
+	const scrollPillsContainer = {
+		hidden: { opacity: 0 },
+		show: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.5,
+			},
+		},
+	};
 
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+	const scrollPill = {
+		hidden: { scale: 0.5, opacity: 0 },
+		show: { scale: 1, opacity: 1, transition: { duration: 1 } },
+	};
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+	useEffect(() => {
+		if (scrollPosition > 0 && scrollPosition < 900) {
+			setActiveScrollPill('section-one');
+		} else if (scrollPosition > 900 && scrollPosition < 1700) {
+			setActiveScrollPill('section-two');
+		} else if (scrollPosition > 1700 && scrollPosition < 2600) {
+			setActiveScrollPill('section-three');
+		}
+	}, [scrollPosition]);
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+	return (
+		<>
+			<Head>
+				<title>Apple | MacBook Pro</title>
+				<link rel='icon' href='/assets/images/apple-logo.png' />
+			</Head>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
-  )
-}
+			{/* scroll pills */}
+			<motion.div
+				variants={scrollPillsContainer}
+				initial='hidden'
+				animate='show'
+				className='outline h-full w-10 flex flex-col justify-center gap-6 items-center z-40  fixed right-0 top-0 '
+			>
+				<motion.a
+					variants={scrollPill}
+					href='#section-one'
+					className={`${
+						activeScrollPill === 'section-one' ? 'bg-blue-500' : 'bg-white'
+					} h-12 w-3 rounded-full `}
+				></motion.a>
+				<motion.a
+					href='#section-two'
+					className={`${
+						activeScrollPill === 'section-two' ? 'bg-blue-500' : 'bg-white'
+					} h-12 w-3 rounded-full `}
+					variants={scrollPill}
+				></motion.a>
+				<motion.a
+					href='#section-three'
+					className={`${
+						activeScrollPill === 'section-three' ? 'bg-blue-500' : 'bg-white'
+					} h-12 w-3 rounded-full `}
+					variants={scrollPill}
+				></motion.a>
+			</motion.div>
 
-export default Home
+			<div
+				className='h-screen snap-y snap-mandatory overflow-y-scroll text-white bg-black'
+				onScroll={(e) => {
+					setScrollPosition(e.currentTarget.scrollTop);
+				}}
+			>
+				<Header scrollPosition={scrollPosition} />
+
+				{/* section one */}
+				<section
+					className='relative h-screen pt-20 snap-start flex flex-col justify-between '
+					id='section-one'
+				>
+					{/* macbook video */}
+					<div className='flex items-center justify-center mt-10 xl:mt-0'>
+						<video className='xl:max-w-7xl w-auto' autoPlay muted>
+							<source
+								src='/assets/video/macbook-halfopen.mp4'
+								type='video/mp4'
+							/>
+							Sorry, your browser doesn't support videos.
+						</video>
+					</div>
+
+					{/* text */}
+					<motion.div
+						className='absolute left-0 top-[400px]  w-full md:top-[500px] lg:top-[550px] space-y-4 flex items-center flex-col'
+						variants={textContainer}
+						initial='hidden'
+						animate='show'
+					>
+						<motion.h1 className='text-5xl font-semibold ' variants={textItem}>
+							MacBook Pro
+						</motion.h1>
+
+						<motion.div
+							className='flex flex-col items-center gap-6 md:flex-row'
+							variants={textItem}
+						>
+							<h1 className='text-3xl font-semibold '>Supercharged by</h1>
+							<img
+								src='assets/images/macbook-m2.jpg'
+								alt=''
+								className='md:w-16 md:h-16 w-32 h-32'
+							/>
+						</motion.div>
+						<motion.h3 className='text-2xl font-medium' variants={textItem}>
+							From $1299
+						</motion.h3>
+					</motion.div>
+
+					{/* scroll down arrow */}
+					<motion.a
+						href='#section-two'
+						className='flex items-center justify-center w-full cursor-pointer animate-bounce pb-2'
+						initial={{ opacity: 0, y: -50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 1.2, delay: 2 }}
+					>
+						<FaChevronDown
+							fontSize='large'
+							className='hover:scale-150 transition-all duration-300'
+						/>
+					</motion.a>
+				</section>
+
+				{/* section two */}
+				<section id='section-two' className='h-screen snap-start'>
+					2
+				</section>
+
+				{/* section three */}
+				<section id='section-three' className='h-screen snap-start'>
+					3
+				</section>
+			</div>
+		</>
+	);
+};
+
+export default Home;

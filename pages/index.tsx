@@ -4,6 +4,11 @@ import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { motion } from 'framer-motion';
 import { FaChevronDown } from 'react-icons/fa';
+import { AiOutlineDollarCircle } from 'react-icons/ai';
+import { BsBoxSeam } from 'react-icons/bs';
+import { TiMessages } from 'react-icons/ti';
+import Card from '../components/Card';
+import MiniCard from '../components/MiniCard';
 
 const Home: NextPage = () => {
 	const [scrollPosition, setScrollPosition] = useState(0);
@@ -40,11 +45,11 @@ const Home: NextPage = () => {
 	};
 
 	useEffect(() => {
-		if (scrollPosition > 0 && scrollPosition < 900) {
+		if (scrollPosition > 0 && scrollPosition < 800) {
 			setActiveScrollPill('section-one');
-		} else if (scrollPosition > 900 && scrollPosition < 1700) {
+		} else if (scrollPosition > 800 && scrollPosition < 1500) {
 			setActiveScrollPill('section-two');
-		} else if (scrollPosition > 1700 && scrollPosition < 2600) {
+		} else if (scrollPosition > 1500 && scrollPosition < 2600) {
 			setActiveScrollPill('section-three');
 		}
 	}, [scrollPosition]);
@@ -87,7 +92,7 @@ const Home: NextPage = () => {
 			</motion.div>
 
 			<div
-				className='h-screen snap-y snap-mandatory overflow-y-scroll text-white bg-black'
+				className='h-screen snap-y snap-mandatory overflow-y-scroll  text-white bg-black'
 				onScroll={(e) => {
 					setScrollPosition(e.currentTarget.scrollTop);
 				}}
@@ -153,8 +158,53 @@ const Home: NextPage = () => {
 				</section>
 
 				{/* section two */}
-				<section id='section-two' className='h-screen snap-start'>
-					2
+				<section
+					id='section-two'
+					className='h-screen snap-start w-full flex flex-col items-center justify-center gap-3 lg:gap-8 xl:gap-10 pt-16 xl:pt-28 '
+				>
+					<div className='flex gap-4 lg:gap-8 xl:gap-12 justify-center  flex-wrap xl:flex-nowrap'>
+						<Card
+							image='\assets\images\m2-chip.png'
+							title=' Apple M2 Chip'
+							text=' M2 is the next generation of Apple silicon. Its 8-core CPU lets you zip through everyday tasks like creating documents and presentations, or take on more intensive workflows like developing in Xcode or mixing tracks in Logic Pro. M2 features up to a 10-core GPU, resulting in a big boost in graphics performance. And its media engine lets you play and edit up to 11 streams of 4K and up to 2 streams of 8K ProRes video.⁴ '
+						/>
+
+						<Card
+							image='\assets\images\unified-memory.png'
+							title=' Unified Memory'
+							text=' The more unified memory (RAM) you choose, the more apps you can run simultaneously with a higher rate of performance.
+						The 13-inch MacBook Pro can be configured with up to 24GB for more fluid multitasking and easy handling of large files. '
+						/>
+
+						<Card
+							image='assets\images\storage.png'
+							title=' Storage'
+							text={` Solid-state drive (SSD) storage is the amount of space your MacBook Pro has for your documents, photos, music, videos, and other files.It delivers significant performance and speed that you'll notice when you start up your Mac, launch an app, or browse your photos. `}
+						/>
+					</div>
+
+					<div className='flex gap-8 xl:gap-10 '>
+						<MiniCard
+							icon={<AiOutlineDollarCircle />}
+							title='Pay monthly at 0% APR'
+							text='You can pay over time when you choose to check out with Apple Card Monthly Installments.†'
+						/>
+
+						<MiniCard
+							icon={<BsBoxSeam />}
+							title='Fast, free delivery'
+							text='Choose free delivery or pick up available items at an Apple Store.'
+						/>
+
+						<MiniCard
+							icon={<TiMessages />}
+							title='
+							Get help buying'
+							text='Have a question? Call a Specialist or chat online.
+
+							Call 1-800-MY-APPLE.'
+						/>
+					</div>
 				</section>
 
 				{/* section three */}

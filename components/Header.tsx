@@ -33,13 +33,13 @@ const Header = ({ scrollPosition }: IProps) => {
 	return (
 		<div
 			className={`${
-				isScrollDown ? 'top-5' : 'top-2 '
+				isScrollDown ? 'top-3 lg:top-5' : 'top-2 '
 			} flex w-full  sticky items-center justify-center z-50 overflow-x-hidden`}
 		>
 			<div
 				className={`${
 					isScrollDown
-						? ' xl:w-[1200px] w-[450px] top-5 sm:w-[550px] md:w-[700px] lg:w-[900px] bg-white  text-black rounded-lg backdrop-blur-3xl hover:bg-white/60 bg-white/50'
+						? ' xl:w-[1200px] w-[450px]  sm:w-[550px] md:w-[700px] lg:w-[900px] bg-white  text-black rounded-lg backdrop-blur-3xl hover:bg-white/60 bg-white/50'
 						: ''
 				} px-4 flex items-center justify-between w-full h-14 transition-all duration-300 ease-out `}
 			>

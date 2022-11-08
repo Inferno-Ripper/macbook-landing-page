@@ -3,43 +3,30 @@ import { HiArrowNarrowRight } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 
 interface IProps {
-	scrollPosition: number;
+	scrollPositionY: number;
 }
 
-const Header = ({ scrollPosition }: IProps) => {
+const Header = ({ scrollPositionY }: IProps) => {
 	const [isScrollDown, setIsScrollDown] = useState(false);
 
-	const handleScroll = () => {
-		const scrollPosition = window.scrollY; // => scroll position
-		console.log(scrollPosition);
-	};
-
 	useEffect(() => {
-		handleScroll();
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
-
-	useEffect(() => {
-		if (scrollPosition > 500) {
+		if (scrollPositionY > 500) {
 			setIsScrollDown(true);
-		} else if (scrollPosition <= 500) {
+		} else if (scrollPositionY <= 500) {
 			setIsScrollDown(false);
 		}
-	}, [scrollPosition]);
+	}, [scrollPositionY]);
 
 	return (
 		<div
 			className={`${
 				isScrollDown ? 'top-3 lg:top-5' : 'top-2 '
-			} flex w-full  sticky items-center justify-center z-50 overflow-x-hidden`}
+			} flex w-full left-0 sticky items-center justify-center z-50 overflow-x-hidden`}
 		>
 			<div
 				className={`${
 					isScrollDown
-						? ' xl:w-[1200px] w-[450px]  sm:w-[550px] md:w-[700px] lg:w-[900px] bg-white  text-black rounded-lg backdrop-blur-3xl hover:bg-white/60 bg-white/50'
+						? ' xl:w-[1200px] w-[450px]  sm:w-[550px] md:w-[700px] lg:w-[900px] bg-white  text-black rounded-lg backdrop-blur-3xl hover:bg-white/90 bg-white/80'
 						: ''
 				} px-4 flex items-center justify-between w-full h-14 transition-all duration-300 ease-out `}
 			>

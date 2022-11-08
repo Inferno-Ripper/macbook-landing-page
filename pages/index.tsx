@@ -2,17 +2,20 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronDown } from 'react-icons/fa';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { BsBoxSeam } from 'react-icons/bs';
 import { TiMessages } from 'react-icons/ti';
 import Card from '../components/Card';
 import MiniCard from '../components/MiniCard';
+import ImageText from '../components/ImageText';
 
 const Home: NextPage = () => {
-	const [scrollPosition, setScrollPosition] = useState(0);
-	const [activeScrollPill, setActiveScrollPill] = useState('');
+	const [scrollPositionY, setScrollPositionY] = useState(0);
+	const [scrollPositionX, setScrollPositionX] = useState(0);
+	const [activeScrollPillY, setActiveScrollPillY] = useState('');
+	const [activeScrollPillX, setActiveScrollPillX] = useState('');
 
 	const textContainer = {
 		hidden: { opacity: 0 },
@@ -45,14 +48,22 @@ const Home: NextPage = () => {
 	};
 
 	useEffect(() => {
-		if (scrollPosition > 0 && scrollPosition < 800) {
-			setActiveScrollPill('section-one');
-		} else if (scrollPosition > 800 && scrollPosition < 1500) {
-			setActiveScrollPill('section-two');
-		} else if (scrollPosition > 1500 && scrollPosition < 2600) {
-			setActiveScrollPill('section-three');
+		if (scrollPositionY > 0 && scrollPositionY < 800) {
+			setActiveScrollPillY('section-one');
+		} else if (scrollPositionY > 800 && scrollPositionY < 1500) {
+			setActiveScrollPillY('section-two');
+		} else if (scrollPositionY > 1500 && scrollPositionY < 2600) {
+			setActiveScrollPillY('section-three');
 		}
-	}, [scrollPosition]);
+	}, [scrollPositionY]);
+
+	useEffect(() => {
+		if (scrollPositionX < 450) {
+			setActiveScrollPillX('section-one-x');
+		} else if (scrollPositionX > 450) {
+			setActiveScrollPillX('section-two-x');
+		}
+	}, [scrollPositionX]);
 
 	return (
 		<>
@@ -66,26 +77,26 @@ const Home: NextPage = () => {
 				variants={scrollPillsContainer}
 				initial='hidden'
 				animate='show'
-				className='outline h-full w-10 flex flex-col justify-center gap-6 items-center z-40  fixed right-0 top-0 '
+				className=' h-full w-10 flex flex-col justify-center gap-6 items-center z-40  fixed right-0 top-0 '
 			>
 				<motion.a
 					variants={scrollPill}
 					href='#section-one'
 					className={`${
-						activeScrollPill === 'section-one' ? 'bg-blue-500' : 'bg-white'
+						activeScrollPillY === 'section-one' ? 'bg-blue-500' : 'bg-white'
 					} h-12 w-3 rounded-full `}
 				></motion.a>
 				<motion.a
 					href='#section-two'
 					className={`${
-						activeScrollPill === 'section-two' ? 'bg-blue-500' : 'bg-white'
+						activeScrollPillY === 'section-two' ? 'bg-blue-500' : 'bg-white'
 					} h-12 w-3 rounded-full `}
 					variants={scrollPill}
 				></motion.a>
 				<motion.a
 					href='#section-three'
 					className={`${
-						activeScrollPill === 'section-three' ? 'bg-blue-500' : 'bg-white'
+						activeScrollPillY === 'section-three' ? 'bg-blue-500' : 'bg-white'
 					} h-12 w-3 rounded-full `}
 					variants={scrollPill}
 				></motion.a>
@@ -94,10 +105,10 @@ const Home: NextPage = () => {
 			<div
 				className='h-screen snap-y snap-mandatory overflow-y-scroll  text-white bg-black'
 				onScroll={(e) => {
-					setScrollPosition(e.currentTarget.scrollTop);
+					setScrollPositionY(e.currentTarget.scrollTop);
 				}}
 			>
-				<Header scrollPosition={scrollPosition} />
+				<Header scrollPositionY={scrollPositionY} />
 
 				{/* section one */}
 				<section
@@ -208,8 +219,126 @@ const Home: NextPage = () => {
 				</section>
 
 				{/* section three */}
-				<section id='section-three' className='h-screen snap-start'>
-					3
+				<section
+					id='section-three'
+					className='h-full snap-start  flex snap-x snap-mandatory w-full overflow-x-scroll'
+					onScroll={(e) => {
+						setScrollPositionX(e.currentTarget.scrollLeft);
+					}}
+				>
+					<div
+						id='section-one-x'
+						className=' snap-start flex items-center justify-center w-screen flex-shrink-0  '
+					>
+						<div className=' bg-gradient-to-b p-8 from-[#182436] flex flex-col gap-20 lg:flex-row justify-between via-[#151517] to-[#151517] w-[80%] h-[80%] rounded-3xl  mt-16 xl:mt-20'>
+							<div className='space-y-10 lg:space-y-40 h-full lg:w-[600px] '>
+								<h1 className='font-bold text-3xl'>Touch ID</h1>
+								<p className='font-semibold lg:text-2xl xl:text-3xl'>
+									A touch on the sensor instantly unlocks your Mac, and a press
+									locks it. Use your fingerprint to rent movies, buy apps, or
+									access things like locked documents or system settings without
+									having to reenter your password. And when you shop online with
+									Apple Pay, Touch ID automatically fills in your shipping and
+									billing information without sharing your card details.
+								</p>
+							</div>
+
+							<div className='grid grid-cols-2 content-center  lg:gap-x-20 gap-4 justify-items-center '>
+								<ImageText
+									image='\assets\images\finger-print.png'
+									text='Unlock your Mac'
+								/>
+								<ImageText
+									image='\assets\images\apple-pay.png'
+									text='Use Apple Pay for payments'
+								/>
+								<ImageText
+									image='\assets\images\password-document.png'
+									text='Open password-protected documents'
+								/>
+								<ImageText
+									image='\assets\images\apple-tv.png'
+									text='Make purchases on the Apple TV app'
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div
+						id='section-two-x'
+						className=' snap-start flex items-center justify-center w-screen flex-shrink-0  '
+					>
+						<div className=' bg-gradient-to-br p-4 sm:p-8 from-[#642C8F] flex flex-col gap-10 lg:flex-row justify-between items-center via-[#7F4E8F] to-[#C76686] w-[80%] h-[80%] rounded-3xl  mt-16 xl:mt-20'>
+							<div className=' lg:w-[600px] '>
+								<p className='font-semibold lg:text-2xl xl:text-3xl'>
+									Ultra‑high bandwidth meets ultra‑versatility. Thunderbolt
+									enables data transfer, charging, and video output all through
+									a single port — and MacBook Pro has two of them. Wi‑Fi 6 keeps
+									MacBook Pro going strong as more and more devices join the
+									network. And the headphone jack even supports high‑impedance
+									headphones.
+								</p>
+							</div>
+
+							<div className='grid sm:grid-cols-3 grid-cols-2 lg:grid-cols-2 content-center  lg:gap-x-20 gap-4 justify-items-center '>
+								<ImageText
+									image='\assets\images\charging.png'
+									text='Charging'
+								/>
+								<ImageText
+									image='\assets\images\monitor.png'
+									text='External display'
+								/>
+								<ImageText
+									image='\assets\images\data-transfer.png'
+									text='Data transfer	up to 40Gb/s15'
+								/>
+								<ImageText
+									image='\assets\images\devices.png'
+									text='Connecting your devices'
+								/>
+								<ImageText
+									image='\assets\images\wifi.png'
+									text='Wi-Fi 6 up to 1.2Gb/s throughput15'
+								/>
+								<ImageText
+									image='\assets\images\headphone.png'
+									text='3.5 mm headphone jack'
+								/>
+							</div>
+						</div>
+					</div>
+
+					<AnimatePresence>
+						{activeScrollPillY === 'section-three' && (
+							<motion.div
+								variants={scrollPillsContainer}
+								initial='hidden'
+								animate='show'
+								exit={{ opacity: 0 }}
+								className='h-10 flex w-full fixed bottom-0 left-0 justify-center gap-6 items-center z-40'
+							>
+								<motion.a
+									variants={scrollPill}
+									href='#section-one-x'
+									className={`${
+										activeScrollPillX === 'section-one-x'
+											? 'bg-blue-500'
+											: 'bg-white'
+									} w-12 h-3 rounded-full `}
+								></motion.a>
+								<motion.a
+									href='#section-two-x'
+									className={`${
+										activeScrollPillX === 'section-two-x'
+											? 'bg-blue-500'
+											: 'bg-white'
+									} w-12 h-3 rounded-full `}
+									variants={scrollPill}
+								></motion.a>
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</section>
 			</div>
 		</>

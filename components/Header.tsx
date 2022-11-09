@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 
-interface IProps {
+interface Props {
 	scrollPositionY: number;
 }
 
-const Header = ({ scrollPositionY }: IProps) => {
+const Header = ({ scrollPositionY }: Props) => {
 	const [isScrollDown, setIsScrollDown] = useState(false);
 
 	useEffect(() => {

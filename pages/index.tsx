@@ -40,27 +40,29 @@ const Home: NextPage = () => {
 				animate='show'
 				className=' h-full w-10 flex flex-col justify-center gap-6 items-center z-40  fixed right-0 top-0 '
 			>
-				<motion.a
-					variants={scrollPill}
-					href='#section-one'
-					className={`${
-						activeScrollPillY === 'section-one' ? 'bg-blue-500' : 'bg-white'
-					} h-12 w-3 rounded-full `}
-				></motion.a>
-				<motion.a
-					href='#section-two'
-					className={`${
-						activeScrollPillY === 'section-two' ? 'bg-blue-500' : 'bg-white'
-					} h-12 w-3 rounded-full `}
-					variants={scrollPill}
-				></motion.a>
-				<motion.a
-					href='#section-three'
-					className={`${
-						activeScrollPillY === 'section-three' ? 'bg-blue-500' : 'bg-white'
-					} h-12 w-3 rounded-full `}
-					variants={scrollPill}
-				></motion.a>
+				<motion.a variants={scrollPill} href='#section-one'>
+					<p
+						className={`${
+							activeScrollPillY === 'section-one' ? 'bg-blue-500' : 'bg-white'
+						} h-12 w-3 rounded-full hover:h-16 transition-all duration-300`}
+					></p>
+				</motion.a>
+
+				<motion.a variants={scrollPill} href='#section-two'>
+					<p
+						className={`${
+							activeScrollPillY === 'section-two' ? 'bg-blue-500' : 'bg-white'
+						} h-12 w-3 rounded-full hover:h-16 transition-all duration-300`}
+					></p>
+				</motion.a>
+
+				<motion.a variants={scrollPill} href='#section-three'>
+					<p
+						className={`${
+							activeScrollPillY === 'section-three' ? 'bg-blue-500' : 'bg-white'
+						} h-12 w-3 rounded-full hover:h-16 transition-all duration-300`}
+					></p>
+				</motion.a>
 			</motion.div>
 
 			<div

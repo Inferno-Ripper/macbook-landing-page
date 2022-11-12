@@ -8,6 +8,7 @@ type Props = {
 	setActiveScrollPillY: React.Dispatch<React.SetStateAction<string>>;
 	scrollPositionY: number;
 };
+
 const SectionThree = ({ setActiveScrollPillY, scrollPositionY }: Props) => {
 	const { ref: sectionThree, inView: sectionThreeInView } = useInView();
 
@@ -20,20 +21,21 @@ const SectionThree = ({ setActiveScrollPillY, scrollPositionY }: Props) => {
 	return (
 		<section
 			id='section-three'
-			className='h-screen snap-start w-full flex flex-col items-center justify-center gap-3 lg:gap-8 xl:gap-10 pt-16 xl:pt-28 '
+			className='flex flex-col items-center justify-center w-full h-screen gap-3 pt-16 snap-start lg:gap-8 xl:gap-10 xl:pt-28 '
 		>
 			<div
-				className='flex gap-4 lg:gap-8 xl:gap-12 justify-center  flex-wrap xl:flex-nowrap'
+				className='flex flex-wrap items-center justify-center gap-4 lg:gap-8 xl:gap-12 xl:flex-nowrap '
 				ref={sectionThree}
 			>
-				{cards.map(({ image, title, text }) => (
-					<Card image={image} title={title} text={text} />
+				{/* uuid causing the card and minicard to rerender when not in viewport */}
+				{cards.map(({ image, title, text }, index) => (
+					<Card key={index} image={image} title={title} text={text} />
 				))}
 			</div>
 
 			<div className='flex gap-8 xl:gap-10 '>
-				{miniCards.map(({ icon, title, text }) => (
-					<MiniCard icon={icon} title={title} text={text} />
+				{miniCards.map(({ icon, title, text }, index) => (
+					<MiniCard key={index} icon={icon} title={title} text={text} />
 				))}
 			</div>
 		</section>

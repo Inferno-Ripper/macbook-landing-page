@@ -58,13 +58,13 @@ export const cards = [
 	},
 
 	{
-		image: '/assets/images/unified-memory.png',
+		image: '/assets/images/unified-memory.svg',
 		title: ' Unified Memory',
 		text: ' The more unified memory (RAM) you choose, the more apps you can run simultaneously with a higher rate of performance.	The 13-inch MacBook Pro can be configured with up to 24GB for more fluid multitasking and easy handling of large files. ',
 	},
 
 	{
-		image: 'assets/images/storage.png',
+		image: 'assets/images/storage.svg',
 		title: ' Storage',
 		text: "Solid-state drive (SSD) storage is the amount of space your MacBook Pro has for your documents, photos, music, videos, and other files.It delivers significant performance and speed that you'll notice when you start up your Mac, launch an app, or browse your photos.",
 	},

@@ -26,9 +26,9 @@ const Header = ({ scrollPositionY }: Props) => {
 			<div
 				className={`${
 					isScrollDown
-						? ' xl:w-[1200px] w-[450px]  sm:w-[550px] md:w-[700px] lg:w-[900px] bg-white  text-black rounded-lg backdrop-blur-3xl hover:bg-white/90 bg-white/80'
+						? ' xl:w-[1200px] w-[450px]  sm:w-[550px] md:w-[700px] lg:w-[900px] hover:scale-x-105  bg-white  text-black rounded-lg backdrop-blur-3xl hover:bg-white/90 bg-white/80'
 						: ''
-				} px-4 flex items-center justify-between w-full h-14 transition-all duration-300 ease-out `}
+				} px-4 flex items-center justify-between w-full h-14 transition-all duration-300 ease-in-out `}
 			>
 				<motion.div
 					initial={{ x: -500 }}

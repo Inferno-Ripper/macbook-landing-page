@@ -21,9 +21,9 @@ const Card = ({ image, title, text }: Props) => {
 					<img src={image} alt='' className='w-10 h-full rounded-lg xl:w-20 ' />
 				</div>
 
-				<h1 className='font-semibold xl:text-xl'>{title}</h1>
+				<h1 className='text-sm font-semibold xl:text-xl'>{title}</h1>
 
-				<p className='text-xs xl:text-sm'>{text}</p>
+				<p className='text-[10px] md:text-xs xl:text-sm'>{text}</p>
 			</div>
 		</motion.div>
 	);

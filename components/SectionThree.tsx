@@ -21,10 +21,10 @@ const SectionThree = ({ setActiveScrollPillY, scrollPositionY }: Props) => {
 	return (
 		<section
 			id='section-three'
-			className='flex flex-col items-center justify-center w-full h-screen gap-3 pt-16 snap-start lg:gap-8 xl:gap-10 xl:pt-28 '
+			className='flex flex-col items-center justify-center w-full h-screen gap-3 pt-16 snap-start xl:gap-10 xl:pt-28 '
 		>
 			<div
-				className='flex flex-wrap items-center justify-center gap-4 lg:gap-8 xl:gap-12 xl:flex-nowrap '
+				className='flex flex-wrap items-center justify-center gap-4 xl:gap-12 xl:flex-nowrap '
 				ref={sectionThree}
 			>
 				{/* uuid causing the card and minicard to rerender when not in viewport */}
@@ -33,7 +33,7 @@ const SectionThree = ({ setActiveScrollPillY, scrollPositionY }: Props) => {
 				))}
 			</div>
 
-			<div className='flex gap-8 xl:gap-10 '>
+			<div className='flex gap-4 xl:gap-10 '>
 				{miniCards.map(({ icon, title, text }, index) => (
 					<MiniCard key={index} icon={icon} title={title} text={text} />
 				))}

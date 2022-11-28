@@ -84,7 +84,7 @@ const SectionTwo = ({
 							Touch ID
 						</motion.h1>
 						<motion.p
-							className='font-semibold lg:text-2xl xl:text-3xl'
+							className='text-sm font-semibold lg:text-2xl xl:text-3xl'
 							ref={sectionTwoXOne}
 							initial={{ opacity: 0.5, y: -100 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ const SectionTwo = ({
 					</div>
 
 					<motion.div
-						className='grid content-center grid-cols-2 gap-4 lg:gap-x-20 justify-items-center '
+						className='grid content-center grid-cols-2 gap-3 lg:gap-x-20 justify-items-center '
 						variants={imageTextAnimationContainer}
 						initial='hidden'
 						whileInView='show'
@@ -143,7 +143,7 @@ const SectionTwo = ({
 					</div>
 
 					<motion.div
-						className='grid content-center grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2 lg:gap-x-20 justify-items-center '
+						className='grid content-center grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-2 lg:gap-x-20 justify-items-center '
 						variants={imageTextAnimationContainer}
 						initial='hidden'
 						whileInView='show'
